@@ -1,0 +1,26 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>kmymoney4j</artifactId>
+		<groupId>uk.org.sappho.kmymoney</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>uk.org.sappho.kmymoney</groupId>
+	<artifactId>kmymoney4j-core</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>kmymoney4j-core</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.5</version>
+		</dependency>
+	</dependencies>
+
+</project>
