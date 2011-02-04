@@ -1,11 +1,11 @@
-package uk.org.sappho.kmymoney.data;
+package uk.org.sappho.kmymoney.rawdata;
 
 public class NameValuePair {
 
     private final String name;
-    private final String value;
+    private final Value value;
 
-    public NameValuePair(String name, String value) {
+    public NameValuePair(String name, Value value) {
 
         this.name = name;
         this.value = value;
@@ -15,7 +15,7 @@ public class NameValuePair {
         return name;
     }
 
-    public String getValue() {
+    public Value getValue() {
         return value;
     }
 }

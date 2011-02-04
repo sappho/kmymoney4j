@@ -1,4 +1,4 @@
-package uk.org.sappho.kmymoney.data.persistence.file;
+package uk.org.sappho.kmymoney.rawdata.persistence.file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,10 +14,11 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-import uk.org.sappho.kmymoney.data.KMyMoneyDataNode;
-import uk.org.sappho.kmymoney.data.KMyMoneyRawData;
-import uk.org.sappho.kmymoney.data.NameValuePair;
-import uk.org.sappho.kmymoney.data.persistence.RawDataPersistence;
+import uk.org.sappho.kmymoney.rawdata.DataNode;
+import uk.org.sappho.kmymoney.rawdata.RawData;
+import uk.org.sappho.kmymoney.rawdata.NameValuePair;
+import uk.org.sappho.kmymoney.rawdata.Value;
+import uk.org.sappho.kmymoney.rawdata.persistence.RawDataPersistence;
 
 public abstract class AbstractRawDataPersistence implements RawDataPersistence {
 
@@ -25,15 +26,15 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
     private final static Pattern nodeRegex = Pattern.compile("^(/|)([A-Z-_]+)(( +[a-zA-Z]+=\".*?\")*)(/|)$");
     private final static Pattern nameValueRegex = Pattern.compile("^ +([a-zA-Z]+)=\"(.*?)\"(.*)$");
 
-    protected KMyMoneyRawData load(InputStream inputStream) throws IOException {
+    protected RawData load(InputStream inputStream) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         boolean readingHeader = true;
         List<String> header = new ArrayList<String>();
-        KMyMoneyDataNode node = new KMyMoneyDataNode("", new ArrayList<NameValuePair>());
-        List<KMyMoneyDataNode> nodeStack = new ArrayList<KMyMoneyDataNode>();
+        DataNode node = new DataNode("", new ArrayList<NameValuePair>());
+        List<DataNode> nodeStack = new ArrayList<DataNode>();
         nodeStack.add(node);
-        List<KMyMoneyDataNode> nodes = node.getChildNodes();
+        List<DataNode> nodes = node.getChildNodes();
         while (true) {
             String line = reader.readLine();
             if (line == null)
@@ -58,9 +59,9 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
                         String name = nameValueMatcher.group(1);
                         String value = StringEscapeUtils.unescapeXml(nameValueMatcher.group(2));
                         attrStr = nameValueMatcher.group(3);
-                        attributes.add(new NameValuePair(name, value));
+                        attributes.add(new NameValuePair(name, new Value(value)));
                     }
-                    node = new KMyMoneyDataNode(tag, attributes);
+                    node = new DataNode(tag, attributes);
                     nodes.add(node);
                     // also a closer?
                     if (matcher.group(5).length() == 0) {
@@ -76,7 +77,7 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
                     if (nodeStackTop < 1)
                         throw new IOException("KMyMoney node close mismatch: " + line);
                     node = nodeStack.get(nodeStackTop);
-                    if (!tag.equals(node.getNodeId()))
+                    if (!tag.equals(node.getTag()))
                         throw new IOException("KMyMoney node close mismatch: " + line);
                     nodeStack.remove(nodeStackTop);
                     node = nodeStack.get(nodeStackTop - 1);
@@ -95,12 +96,10 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
         if (nodes.size() > 1)
             throw new IOException("KMyMoney data has more than one root element");
         node = nodes.get(0);
-        if (!node.getNodeId().equals("KMYMONEY-FILE"))
-            throw new IOException("KMyMoney data root node is not <KMYMONEY-FILE>");
-        return new KMyMoneyRawData(header, node);
+        return new RawData(header, node);
     }
 
-    protected void save(KMyMoneyRawData rawData, OutputStream outputStream) throws IOException {
+    protected void save(RawData rawData, OutputStream outputStream) throws IOException {
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
         for (String line : rawData.getHeader()) {
@@ -111,16 +110,19 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
         writer.close();
     }
 
-    private void save(BufferedWriter writer, int indent, KMyMoneyDataNode node) throws IOException {
+    private void save(BufferedWriter writer, int indent, DataNode node) throws IOException {
 
         for (int ic = 0; ic < indent; ic++)
             writer.write(" ");
-        writer.write("<" + node.getNodeId());
+        writer.write("<" + node.getTag());
         for (NameValuePair nameValuePair : node.getAttributes()) {
             writer.write(" " + nameValuePair.getName() + "=\"");
-            String value = nameValuePair.getValue();
+            String value = nameValuePair.getValue().getValue();
             for (char ch : value.toCharArray())
                 switch (ch) {
+                case 10:
+                    writer.write("&#xa;");
+                    break;
                 case '"':
                     writer.write("&quot;");
                     break;
@@ -138,17 +140,17 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
                 }
             writer.write("\"");
         }
-        List<KMyMoneyDataNode> childNodes = node.getChildNodes();
+        List<DataNode> childNodes = node.getChildNodes();
         if (childNodes.size() == 0)
             writer.write("/");
         writer.write(">");
         writer.write(10);
-        for (KMyMoneyDataNode childNode : childNodes)
+        for (DataNode childNode : childNodes)
             save(writer, indent + 1, childNode);
         if (childNodes.size() != 0) {
             for (int ic = 0; ic < indent; ic++)
                 writer.write(" ");
-            writer.write("</" + node.getNodeId() + ">");
+            writer.write("</" + node.getTag() + ">");
             writer.write(10);
         }
     }

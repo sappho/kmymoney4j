@@ -1,19 +1,26 @@
 package uk.org.sappho.kmymoney.data.persistence.file;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
 
-import uk.org.sappho.kmymoney.data.KMyMoneyRawData;
+import uk.org.sappho.kmymoney.data.KMyMoneyData;
+import uk.org.sappho.kmymoney.rawdata.DataNodeException;
+import uk.org.sappho.kmymoney.rawdata.RawData;
+import uk.org.sappho.kmymoney.rawdata.persistence.file.FilenameRawDataPersistence;
 
 public class FilenameRawDataPersistenceTest {
 
     @Test
-    public void shouldReadFile() throws IOException {
+    public void shouldReadFile() throws IOException, IllegalArgumentException, SecurityException,
+            DataNodeException, InstantiationException, IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         FilenameRawDataPersistence persistence = new FilenameRawDataPersistence(
-                "test.xml");
-        KMyMoneyRawData data = persistence.load();
-        persistence.save(data);
+                "../../money-data/Andrew-Money.xml");
+        RawData rawdata = persistence.load();
+        KMyMoneyData data = new KMyMoneyData(rawdata.getRootNode());
+        persistence.save(rawdata);
     }
 }

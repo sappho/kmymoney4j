@@ -1,13 +1,13 @@
-package uk.org.sappho.kmymoney.data;
+package uk.org.sappho.kmymoney.rawdata;
 
 import java.util.List;
 
-public class KMyMoneyRawData {
+public class RawData {
 
     private final List<String> header;
-    private final KMyMoneyDataNode rootNode;
+    private final DataNode rootNode;
 
-    public KMyMoneyRawData(List<String> header, KMyMoneyDataNode rootNode) {
+    public RawData(List<String> header, DataNode rootNode) {
 
         this.header = header;
         this.rootNode = rootNode;
@@ -18,7 +18,7 @@ public class KMyMoneyRawData {
         return header;
     }
 
-    public KMyMoneyDataNode getRootNode() {
+    public DataNode getRootNode() {
 
         return rootNode;
     }
