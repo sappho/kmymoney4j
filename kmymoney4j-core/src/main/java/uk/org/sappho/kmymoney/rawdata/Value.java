@@ -13,6 +13,7 @@ public class Value {
     private Date date = null;
 
     private final static Pattern idRegex = Pattern.compile("^([A-Z])0*([0-9]*?)$");
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Value(String value) {
 
@@ -55,7 +56,7 @@ public class Value {
 
         try {
             if (date == null)
-                date = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+                date = dateFormat.parse(value);
             return date;
         } catch (Throwable t) {
             throw new DataNodeException("Value " + value + " is not a correctly formatted date");
