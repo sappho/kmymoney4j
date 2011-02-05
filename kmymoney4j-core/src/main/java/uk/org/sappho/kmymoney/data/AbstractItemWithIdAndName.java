@@ -2,20 +2,20 @@ package uk.org.sappho.kmymoney.data;
 
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
+import uk.org.sappho.kmymoney.rawdata.Value;
 
 public abstract class AbstractItemWithIdAndName extends AbstractItemWithId {
 
-    private final String name;
+    private final Value name;
 
     protected AbstractItemWithIdAndName(DataNode node) throws DataNodeException {
 
         super(node);
-        name = node.getAttribute("name").getValue();
-        if (name.length() == 0)
-            throw new DataNodeException("Payee " + getId() + " has a blank name");
+        name = node.getAttribute("name");
     }
 
     public String getName() {
-        return name;
+
+        return name.getValue();
     }
 }
