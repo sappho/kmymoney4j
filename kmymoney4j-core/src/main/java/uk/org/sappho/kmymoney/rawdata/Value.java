@@ -25,23 +25,38 @@ public class Value {
         return value;
     }
 
-    public Long getId(String requiredPrefix) throws DataNodeException {
+    public long getId(String requiredPrefix) throws DataNodeException {
+
+        return getId(requiredPrefix, new String[] {});
+    }
+
+    public long getId(String requiredPrefix, String[] reservedIds) throws DataNodeException {
 
         if (id == null) {
-            Matcher matcher = idRegex.matcher(value);
-            if (matcher.matches()) {
-                String digits = matcher.group(2);
-                if (matcher.group(1).equals(requiredPrefix) && digits.length() > 0)
-                    id = Long.parseLong(digits);
+            boolean isReserved = false;
+            for (String reservedId : reservedIds)
+                if (value.equals(reservedId)) {
+                    isReserved = true;
+                    break;
+                }
+            if (isReserved)
+                id = -1L;
+            else {
+                Matcher matcher = idRegex.matcher(value);
+                if (matcher.matches()) {
+                    String digits = matcher.group(2);
+                    if (matcher.group(1).equals(requiredPrefix) && digits.length() > 0)
+                        id = Long.parseLong(digits);
+                }
+                if (id == null)
+                    throw new DataNodeException("ID value " + value + " is not actually an ID with prefix "
+                            + requiredPrefix);
             }
-            if (id == null)
-                throw new DataNodeException("ID value " + value + " is not actually an ID with prefix "
-                        + requiredPrefix);
         }
         return id;
     }
 
-    public Long getLong() throws DataNodeException {
+    public long getLong() throws DataNodeException {
 
         try {
             if (longValue == null)

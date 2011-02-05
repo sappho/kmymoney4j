@@ -6,31 +6,23 @@ import uk.org.sappho.kmymoney.rawdata.Value;
 
 public abstract class AbstractItemWithId extends AbstractItem {
 
-    private final Long id;
-    private final String idString;
+    private final Value id;
 
     protected AbstractItemWithId(DataNode node) throws DataNodeException {
 
         super(node);
-        Value value = node.getAttribute("id");
-        idString = value.getValue();
-        boolean isReserved = false;
-        for (String candidate : getReservedIds())
-            if (candidate.equals(idString)) {
-                isReserved = true;
-                break;
-            }
-        id = isReserved ? 0L : value.getId(getIdPrefix());
+        id = node.getAttribute("id");
     }
 
-    public Long getId() {
-        return id;
+    public long getId() throws DataNodeException {
+
+        return id.getId(getIdPrefix(), getReservedIds());
     }
+
+    abstract protected String getIdPrefix();
 
     protected String[] getReservedIds() {
 
         return new String[] {};
     }
-
-    abstract protected String getIdPrefix();
 }
