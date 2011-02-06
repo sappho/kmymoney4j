@@ -12,6 +12,8 @@ public class KMyMoneyData {
     private final AccountGroup accounts;
     private final PayeeGroup payees;
     private final TransactionGroup transactions;
+    private final CurrencyGroup currencies;
+    private final PriceGroup prices;
     private final Value lastUpdated;
     private final long version;
     private final long fixVersion;
@@ -24,6 +26,8 @@ public class KMyMoneyData {
         accounts = new AccountGroup(node.getChildNode(AccountGroup.tag));
         payees = new PayeeGroup(node.getChildNode(PayeeGroup.tag));
         transactions = new TransactionGroup(node.getChildNode(TransactionGroup.tag));
+        currencies = new CurrencyGroup(node.getChildNode(CurrencyGroup.tag));
+        prices = new PriceGroup(node.getChildNode(PriceGroup.tag));
         DataNode infoNode = node.getChildNode("FILEINFO");
         lastUpdated = infoNode.getChildNode("LAST_MODIFIED_DATE").getAttribute("date");
         version = infoNode.getChildNode("VERSION").getAttribute("id").getLong();
@@ -43,6 +47,16 @@ public class KMyMoneyData {
     public TransactionGroup getTransactions() {
 
         return transactions;
+    }
+
+    public CurrencyGroup getCurrencies() {
+
+        return currencies;
+    }
+
+    public PriceGroup getPrices() {
+
+        return prices;
     }
 
     public Date getLastUpdated() throws DataNodeException {

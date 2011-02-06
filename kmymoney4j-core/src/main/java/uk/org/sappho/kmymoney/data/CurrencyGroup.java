@@ -5,25 +5,19 @@ import java.lang.reflect.InvocationTargetException;
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 
-public class SplitGroup extends AbstractGroup<Split> {
+public class CurrencyGroup extends AbstractGroup<Currency> {
 
-    public static final String tag = "SPLITS";
+    public static final String tag = "CURRENCIES";
 
-    public SplitGroup(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
+    public CurrencyGroup(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
             InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
-        super(node, Split.class);
+        super(node, Currency.class);
     }
 
     @Override
     public String getTag() {
 
         return tag;
-    }
-
-    @Override
-    protected boolean hasChildCount() {
-
-        return false;
     }
 }

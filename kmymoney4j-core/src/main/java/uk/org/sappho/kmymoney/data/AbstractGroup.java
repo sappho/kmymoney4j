@@ -20,12 +20,12 @@ abstract public class AbstractGroup<T> extends AbstractItem {
         super(node);
         node.checkTag(getTag());
         Long count = null;
-        if (hasFileCount())
+        if (hasChildCount())
             count = node.getAttribute("count").getLong();
         for (DataNode childNode : node.getChildNodes()) {
             items.add(itemClass.getConstructor(constructorParameterTypes).newInstance(childNode));
         }
-        if (hasFileCount() && items.size() != count)
+        if (hasChildCount() && items.size() != count)
             throw new DataNodeException(getTag() + " node should have " + count + " item(s) but has "
                         + items.size() + " instead");
     }
@@ -35,7 +35,7 @@ abstract public class AbstractGroup<T> extends AbstractItem {
         return items;
     }
 
-    protected boolean hasFileCount() {
+    protected boolean hasChildCount() {
 
         return true;
     }
