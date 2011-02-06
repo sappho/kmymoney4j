@@ -2,6 +2,8 @@ package uk.org.sappho.kmymoney.data;
 
 import java.text.DecimalFormat;
 
+import org.apache.commons.lang.math.Fraction;
+
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.Value;
@@ -41,12 +43,14 @@ public class Split extends AbstractItemWithId {
         return memo.getValue();
     }
 
-    public Value getShares() {
-        return shares;
+    public Fraction getShares() throws DataNodeException {
+
+        return shares.getFraction();
     }
 
-    public Value getValue() {
-        return value;
+    public Fraction getValue() throws DataNodeException {
+
+        return value.getFraction();
     }
 
     @Override

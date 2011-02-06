@@ -1,13 +1,13 @@
 package uk.org.sappho.kmymoney.rawdata;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DataNode {
 
     private final String tag;
     private final List<NameValuePair> attributes;
-    private final List<DataNode> childNodes = new ArrayList<DataNode>();
+    private final List<DataNode> childNodes = new LinkedList<DataNode>();
 
     public DataNode(String nodeId, List<NameValuePair> attributes) {
 
