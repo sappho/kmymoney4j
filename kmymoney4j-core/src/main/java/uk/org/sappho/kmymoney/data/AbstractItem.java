@@ -19,4 +19,22 @@ public abstract class AbstractItem {
     }
 
     abstract protected String getTag();
+
+    public long getId() throws DataNodeException {
+
+        return 0L;
+    }
+
+    public String getIdString() {
+
+        return null;
+    }
+
+    public void setId(@SuppressWarnings("unused") long id) {
+    }
+
+    public String getName() {
+
+        return null;
+    }
 }

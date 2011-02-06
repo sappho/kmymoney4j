@@ -1,5 +1,6 @@
 package uk.org.sappho.kmymoney.data;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import uk.org.sappho.kmymoney.rawdata.DataNode;
@@ -10,6 +11,8 @@ public class Account extends AbstractItemWithIdAndName {
 
     private final Value parentAccountId;
     private final Value lastModified;
+
+    private final static DecimalFormat idNumberFormat = new DecimalFormat("000000");
 
     public Account(DataNode node) throws DataNodeException {
 
@@ -38,6 +41,12 @@ public class Account extends AbstractItemWithIdAndName {
     protected String getIdPrefix() {
 
         return "A";
+    }
+
+    @Override
+    protected DecimalFormat getIdNumberFormat() {
+
+        return idNumberFormat;
     }
 
     @Override

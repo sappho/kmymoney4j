@@ -1,5 +1,6 @@
 package uk.org.sappho.kmymoney.rawdata;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -9,7 +10,7 @@ import org.apache.commons.lang.math.Fraction;
 
 public class Value {
 
-    private final String value;
+    private String value;
     private Long id = null;
     private Long longValue = null;
     private Date date = null;
@@ -43,7 +44,7 @@ public class Value {
                     break;
                 }
             if (isReserved)
-                id = -1L;
+                id = 0L;
             else {
                 Matcher matcher = idRegex.matcher(value);
                 if (matcher.matches()) {
@@ -59,6 +60,12 @@ public class Value {
         return id;
     }
 
+    public void setId(long id, String requiredPrefix, DecimalFormat format) {
+
+        value = requiredPrefix + format.format(id);
+        this.id = id;
+    }
+
     public long getLong() throws DataNodeException {
 
         try {
@@ -68,6 +75,12 @@ public class Value {
         } catch (Throwable t) {
             throw new DataNodeException("Value " + value + " is not a correctly formatted long integer");
         }
+    }
+
+    public void setLong(long value) {
+
+        this.value = "" + value;
+        longValue = value;
     }
 
     public Date getDate() throws DataNodeException {

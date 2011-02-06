@@ -1,6 +1,7 @@
 package uk.org.sappho.kmymoney.data;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import uk.org.sappho.kmymoney.rawdata.DataNode;
@@ -13,6 +14,8 @@ public class Transaction extends AbstractItemWithId {
     private final Value entryDate;
     private final Value commodity;
     private final SplitGroup splits;
+
+    private final static DecimalFormat idNumberFormat = new DecimalFormat("000000000000000000");
 
     public Transaction(DataNode node) throws DataNodeException, IllegalArgumentException, SecurityException,
             InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -53,5 +56,11 @@ public class Transaction extends AbstractItemWithId {
     protected String getIdPrefix() {
 
         return "T";
+    }
+
+    @Override
+    protected DecimalFormat getIdNumberFormat() {
+
+        return idNumberFormat;
     }
 }

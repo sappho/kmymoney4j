@@ -14,6 +14,7 @@ public abstract class AbstractItemWithIdAndName extends AbstractItemWithId {
         name = node.getAttribute("name");
     }
 
+    @Override
     public String getName() {
 
         return name.getValue();

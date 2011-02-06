@@ -21,6 +21,7 @@ public class FilenameRawDataPersistenceTest {
                 "../../money-data/Andrew-Money.xml");
         RawData rawdata = persistence.load();
         KMyMoneyData data = new KMyMoneyData(rawdata.getRootNode());
+        data.getPayees().add("Colourfull Character");
         persistence.save(rawdata);
     }
 }
