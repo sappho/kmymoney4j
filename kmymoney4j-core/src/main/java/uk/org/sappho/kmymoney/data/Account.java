@@ -8,19 +8,19 @@ import uk.org.sappho.kmymoney.rawdata.Value;
 
 public class Account extends AbstractItemWithIdAndName {
 
-    private final String parentAccountId;
+    private final Value parentAccountId;
     private final Value lastModified;
 
     public Account(DataNode node) throws DataNodeException {
 
         super(node);
-        parentAccountId = node.getAttribute("parentaccount").getValue();
+        parentAccountId = node.getAttribute("parentaccount");
         lastModified = node.getAttribute("lastmodified");
     }
 
     public String getParentAccountId() {
 
-        return parentAccountId;
+        return parentAccountId.getValue();
     }
 
     public Date getLastModified() throws DataNodeException {

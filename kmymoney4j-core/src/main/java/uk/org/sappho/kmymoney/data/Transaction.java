@@ -12,7 +12,6 @@ public class Transaction extends AbstractItemWithId {
     private final Value postDate;
     private final Value entryDate;
     private final Value commodity;
-    private final Value memo;
     private final SplitGroup splits;
 
     public Transaction(DataNode node) throws DataNodeException, IllegalArgumentException, SecurityException,
@@ -22,7 +21,6 @@ public class Transaction extends AbstractItemWithId {
         postDate = node.getAttribute("postdate");
         entryDate = node.getAttribute("entrydate");
         commodity = node.getAttribute("commodity");
-        memo = node.getAttribute("memo");
         splits = new SplitGroup(node.getChildNode(SplitGroup.tag));
     }
 
@@ -39,11 +37,6 @@ public class Transaction extends AbstractItemWithId {
     public String getCommodity() {
 
         return commodity.getValue();
-    }
-
-    public String getMemo() {
-
-        return memo.getValue();
     }
 
     public SplitGroup getSplits() {

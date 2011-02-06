@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.math.Fraction;
+
 public class Value {
 
     private final String value;
     private Long id = null;
     private Long longValue = null;
     private Date date = null;
+    private Fraction fraction = null;
 
     private final static Pattern idRegex = Pattern.compile("^([A-Z])0*([0-9]*?)$");
     private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -75,6 +78,17 @@ public class Value {
             return date;
         } catch (Throwable t) {
             throw new DataNodeException("Value " + value + " is not a correctly formatted date");
+        }
+    }
+
+    public Fraction getFraction() throws DataNodeException {
+
+        try {
+            if (fraction == null)
+                fraction = Fraction.getFraction(value);
+            return fraction;
+        } catch (Throwable t) {
+            throw new DataNodeException("Value " + value + " is not a correctly formatted fractional value");
         }
     }
 }
