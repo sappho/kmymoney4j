@@ -94,6 +94,12 @@ public class Value {
         }
     }
 
+    public void setDate(Date date) {
+
+        value = dateFormat.format(date);
+        this.date = date;
+    }
+
     public Fraction getFraction() throws DataNodeException {
 
         try {

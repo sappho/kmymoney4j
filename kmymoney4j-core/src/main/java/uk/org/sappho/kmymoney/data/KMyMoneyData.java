@@ -74,6 +74,11 @@ public class KMyMoneyData extends AbstractItem {
         return fixVersion;
     }
 
+    public void setLastUpdated(Date date) {
+
+        lastUpdated.setDate(date);
+    }
+
     @Override
     protected String getTag() {
 
