@@ -7,7 +7,7 @@ import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.Value;
 
-public class KMyMoneyData {
+public class KMyMoneyData extends AbstractItem {
 
     private final AccountGroup accounts;
     private final PayeeGroup payees;
@@ -22,7 +22,7 @@ public class KMyMoneyData {
             SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        node.checkTag("KMYMONEY-FILE");
+        super(node);
         accounts = new AccountGroup(node.getChildNode(AccountGroup.tag));
         payees = new PayeeGroup(node.getChildNode(PayeeGroup.tag));
         transactions = new TransactionGroup(node.getChildNode(TransactionGroup.tag));
@@ -72,5 +72,11 @@ public class KMyMoneyData {
     public long getFixVersion() throws DataNodeException {
 
         return fixVersion;
+    }
+
+    @Override
+    protected String getTag() {
+
+        return "KMYMONEY-FILE";
     }
 }
