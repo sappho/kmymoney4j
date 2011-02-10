@@ -17,6 +17,7 @@ public class KMyMoneyData extends AbstractItem {
     private final Value lastUpdated;
     private final long version;
     private final long fixVersion;
+    private final String baseCurrency;
 
     public KMyMoneyData(DataNode node) throws DataNodeException, IllegalArgumentException,
             SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException,
@@ -32,6 +33,15 @@ public class KMyMoneyData extends AbstractItem {
         lastUpdated = infoNode.getChildNode("LAST_MODIFIED_DATE").getAttribute("date");
         version = infoNode.getChildNode("VERSION").getAttribute("id").getLong();
         fixVersion = infoNode.getChildNode("FIXVERSION").getAttribute("id").getLong();
+        DataNode keyValuePairsNode = node.getChildNode("KEYVALUEPAIRS");
+        String baseCurrency = null;
+        for (DataNode keyValuePairNode : keyValuePairsNode.getChildNodes())
+            if (keyValuePairNode.getTag().equals("PAIR")
+                    && keyValuePairNode.getAttribute("key").getValue().equals("kmm-baseCurrency"))
+                baseCurrency = keyValuePairNode.getAttribute("value").getValue();
+        if (baseCurrency == null)
+            throw new DataNodeException("Base currency is missing from key/value pair table");
+        this.baseCurrency = baseCurrency;
     }
 
     public AccountGroup getAccounts() {
@@ -72,6 +82,10 @@ public class KMyMoneyData extends AbstractItem {
     public long getFixVersion() throws DataNodeException {
 
         return fixVersion;
+    }
+
+    public String getBaseCurrency() {
+        return baseCurrency;
     }
 
     public void setLastUpdated(Date date) {
