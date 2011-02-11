@@ -17,6 +17,6 @@ public abstract class AbstractItemWithIdAndName extends AbstractItemWithId {
     @Override
     public String getName() {
 
-        return name.getValue();
+        return name.toString();
     }
 }

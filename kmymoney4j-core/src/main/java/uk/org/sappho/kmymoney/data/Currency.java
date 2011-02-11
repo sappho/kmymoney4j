@@ -18,7 +18,7 @@ public class Currency extends AbstractItemWithId {
 
     public String getSymbol() {
 
-        return symbol.getValue();
+        return symbol.toString();
     }
 
     @Override

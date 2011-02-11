@@ -23,12 +23,12 @@ public class PricePairGroup extends AbstractGroup<Price> {
 
     public String getFromCurrencyId() {
 
-        return fromCurrencyId.getValue();
+        return fromCurrencyId.toString();
     }
 
     public String getToCurrencyId() {
 
-        return toCurrencyId.getValue();
+        return toCurrencyId.toString();
     }
 
     @Override

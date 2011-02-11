@@ -39,7 +39,7 @@ public class Transaction extends AbstractItemWithId {
 
     public String getCommodity() {
 
-        return commodity.getValue();
+        return commodity.toString();
     }
 
     public SplitGroup getSplits() {

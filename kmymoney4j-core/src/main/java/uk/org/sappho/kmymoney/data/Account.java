@@ -23,7 +23,7 @@ public class Account extends AbstractItemWithIdAndName {
 
     public String getParentAccountId() {
 
-        return parentAccountId.getValue();
+        return parentAccountId.toString();
     }
 
     public Date getLastModified() throws DataNodeException {

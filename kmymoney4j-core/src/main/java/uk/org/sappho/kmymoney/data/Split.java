@@ -30,17 +30,17 @@ public class Split extends AbstractItemWithId {
 
     public String getPayeeId() {
 
-        return payeeId.getValue();
+        return payeeId.toString();
     }
 
     public String getAccountId() {
 
-        return accountId.getValue();
+        return accountId.toString();
     }
 
     public String getMemo() {
 
-        return memo.getValue();
+        return memo.toString();
     }
 
     public Fraction getShares() throws DataNodeException {

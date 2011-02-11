@@ -15,8 +15,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringEscapeUtils;
 
 import uk.org.sappho.kmymoney.rawdata.DataNode;
-import uk.org.sappho.kmymoney.rawdata.RawData;
 import uk.org.sappho.kmymoney.rawdata.NameValuePair;
+import uk.org.sappho.kmymoney.rawdata.RawData;
 import uk.org.sappho.kmymoney.rawdata.Value;
 import uk.org.sappho.kmymoney.rawdata.persistence.RawDataPersistence;
 
@@ -117,7 +117,7 @@ public abstract class AbstractRawDataPersistence implements RawDataPersistence {
         writer.write("<" + node.getTag());
         for (NameValuePair nameValuePair : node.getAttributes()) {
             writer.write(" " + nameValuePair.getName() + "=\"");
-            String value = nameValuePair.getValue().getValue();
+            String value = nameValuePair.getValue().toString();
             for (char ch : value.toCharArray())
                 switch (ch) {
                 case 10:

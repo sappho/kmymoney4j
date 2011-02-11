@@ -37,8 +37,8 @@ public class KMyMoneyData extends AbstractItem {
         String baseCurrency = null;
         for (DataNode keyValuePairNode : keyValuePairsNode.getChildNodes())
             if (keyValuePairNode.getTag().equals("PAIR")
-                    && keyValuePairNode.getAttribute("key").getValue().equals("kmm-baseCurrency"))
-                baseCurrency = keyValuePairNode.getAttribute("value").getValue();
+                    && keyValuePairNode.getAttribute("key").toString().equals("kmm-baseCurrency"))
+                baseCurrency = keyValuePairNode.getAttribute("value").toString();
         if (baseCurrency == null)
             throw new DataNodeException("Base currency is missing from key/value pair table");
         this.baseCurrency = baseCurrency;
