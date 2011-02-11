@@ -16,7 +16,7 @@ public class Value {
     private Date date = null;
     private Fraction fraction = null;
 
-    private final static Pattern idRegex = Pattern.compile("^([A-Z])0*([0-9]*?)$");
+    private final static Pattern idRegex = Pattern.compile("^([A-Z]+)0*([0-9]*?)$");
     private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Value(String value) {

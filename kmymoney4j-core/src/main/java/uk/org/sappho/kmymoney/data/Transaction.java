@@ -15,6 +15,7 @@ public class Transaction extends AbstractItemWithId {
     private final Value commodity;
     private final SplitGroup splits;
 
+    public final static String tag = "TRANSACTION";
     private final static DecimalFormat idNumberFormat = new DecimalFormat("000000000000000000");
 
     public Transaction(DataNode node) throws DataNodeException, IllegalArgumentException, SecurityException,
@@ -49,7 +50,7 @@ public class Transaction extends AbstractItemWithId {
     @Override
     protected String getTag() {
 
-        return "TRANSACTION";
+        return tag;
     }
 
     @Override

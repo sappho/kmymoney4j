@@ -12,6 +12,7 @@ public class KMyMoneyData extends AbstractItem {
     private final AccountGroup accounts;
     private final PayeeGroup payees;
     private final TransactionGroup transactions;
+    private final ScheduleGroup schedules;
     private final CurrencyGroup currencies;
     private final PriceGroup prices;
     private final Value lastUpdated;
@@ -27,6 +28,7 @@ public class KMyMoneyData extends AbstractItem {
         accounts = new AccountGroup(node.getChildNode(AccountGroup.tag));
         payees = new PayeeGroup(node.getChildNode(PayeeGroup.tag));
         transactions = new TransactionGroup(node.getChildNode(TransactionGroup.tag));
+        schedules = new ScheduleGroup(node.getChildNode(ScheduleGroup.tag));
         currencies = new CurrencyGroup(node.getChildNode(CurrencyGroup.tag));
         prices = new PriceGroup(node.getChildNode(PriceGroup.tag));
         DataNode infoNode = node.getChildNode("FILEINFO");
@@ -57,6 +59,10 @@ public class KMyMoneyData extends AbstractItem {
     public TransactionGroup getTransactions() {
 
         return transactions;
+    }
+
+    public ScheduleGroup getSchedules() {
+        return schedules;
     }
 
     public CurrencyGroup getCurrencies() {
