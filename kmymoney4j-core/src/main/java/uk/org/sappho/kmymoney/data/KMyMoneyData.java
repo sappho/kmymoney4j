@@ -13,6 +13,7 @@ public class KMyMoneyData extends AbstractItem {
     private final PayeeList payees;
     private final TransactionList transactions;
     private final ScheduleList schedules;
+    private final BudgetList budgets;
     private final CurrencyList currencies;
     private final PriceList prices;
     private final Value lastUpdated;
@@ -29,6 +30,7 @@ public class KMyMoneyData extends AbstractItem {
         payees = new PayeeList(node.getChildNode(PayeeList.tag));
         transactions = new TransactionList(node.getChildNode(TransactionList.tag));
         schedules = new ScheduleList(node.getChildNode(ScheduleList.tag));
+        budgets = new BudgetList(node.getChildNode(BudgetList.tag));
         currencies = new CurrencyList(node.getChildNode(CurrencyList.tag));
         prices = new PriceList(node.getChildNode(PriceList.tag));
         DataNode infoNode = node.getChildNode("FILEINFO");
@@ -62,7 +64,13 @@ public class KMyMoneyData extends AbstractItem {
     }
 
     public ScheduleList getSchedules() {
+
         return schedules;
+    }
+
+    public BudgetList getBudgets() {
+
+        return budgets;
     }
 
     public CurrencyList getCurrencies() {
