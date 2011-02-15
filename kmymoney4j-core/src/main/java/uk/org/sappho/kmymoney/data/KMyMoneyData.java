@@ -9,12 +9,12 @@ import uk.org.sappho.kmymoney.rawdata.Value;
 
 public class KMyMoneyData extends AbstractItem {
 
-    private final AccountGroup accounts;
-    private final PayeeGroup payees;
-    private final TransactionGroup transactions;
-    private final ScheduleGroup schedules;
-    private final CurrencyGroup currencies;
-    private final PriceGroup prices;
+    private final AccountList accounts;
+    private final PayeeList payees;
+    private final TransactionList transactions;
+    private final ScheduleList schedules;
+    private final CurrencyList currencies;
+    private final PriceList prices;
     private final Value lastUpdated;
     private final long version;
     private final long fixVersion;
@@ -25,12 +25,12 @@ public class KMyMoneyData extends AbstractItem {
             NoSuchMethodException {
 
         super(node);
-        accounts = new AccountGroup(node.getChildNode(AccountGroup.tag));
-        payees = new PayeeGroup(node.getChildNode(PayeeGroup.tag));
-        transactions = new TransactionGroup(node.getChildNode(TransactionGroup.tag));
-        schedules = new ScheduleGroup(node.getChildNode(ScheduleGroup.tag));
-        currencies = new CurrencyGroup(node.getChildNode(CurrencyGroup.tag));
-        prices = new PriceGroup(node.getChildNode(PriceGroup.tag));
+        accounts = new AccountList(node.getChildNode(AccountList.tag));
+        payees = new PayeeList(node.getChildNode(PayeeList.tag));
+        transactions = new TransactionList(node.getChildNode(TransactionList.tag));
+        schedules = new ScheduleList(node.getChildNode(ScheduleList.tag));
+        currencies = new CurrencyList(node.getChildNode(CurrencyList.tag));
+        prices = new PriceList(node.getChildNode(PriceList.tag));
         DataNode infoNode = node.getChildNode("FILEINFO");
         lastUpdated = infoNode.getChildNode("LAST_MODIFIED_DATE").getAttribute("date");
         version = infoNode.getChildNode("VERSION").getAttribute("id").getLong();
@@ -46,31 +46,31 @@ public class KMyMoneyData extends AbstractItem {
         this.baseCurrency = baseCurrency;
     }
 
-    public AccountGroup getAccounts() {
+    public AccountList getAccounts() {
 
         return accounts;
     }
 
-    public PayeeGroup getPayees() {
+    public PayeeList getPayees() {
 
         return payees;
     }
 
-    public TransactionGroup getTransactions() {
+    public TransactionList getTransactions() {
 
         return transactions;
     }
 
-    public ScheduleGroup getSchedules() {
+    public ScheduleList getSchedules() {
         return schedules;
     }
 
-    public CurrencyGroup getCurrencies() {
+    public CurrencyList getCurrencies() {
 
         return currencies;
     }
 
-    public PriceGroup getPrices() {
+    public PriceList getPrices() {
 
         return prices;
     }

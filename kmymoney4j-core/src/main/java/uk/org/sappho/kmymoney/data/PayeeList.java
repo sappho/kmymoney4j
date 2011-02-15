@@ -9,11 +9,11 @@ import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.NameValuePair;
 import uk.org.sappho.kmymoney.rawdata.Value;
 
-public class PayeeGroup extends AbstractGroup<Payee> {
+public class PayeeList extends AbstractList<Payee> {
 
     public static final String tag = "PAYEES";
 
-    public PayeeGroup(DataNode node) throws IllegalArgumentException, SecurityException,
+    public PayeeList(DataNode node) throws IllegalArgumentException, SecurityException,
             DataNodeException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 

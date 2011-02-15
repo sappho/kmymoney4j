@@ -13,7 +13,7 @@ public class Transaction extends AbstractItemWithId {
     private final Value postDate;
     private final Value entryDate;
     private final Value commodity;
-    private final SplitGroup splits;
+    private final SplitList splits;
 
     public final static String tag = "TRANSACTION";
     private final static DecimalFormat idNumberFormat = new DecimalFormat("000000000000000000");
@@ -25,7 +25,7 @@ public class Transaction extends AbstractItemWithId {
         postDate = node.getAttribute("postdate");
         entryDate = node.getAttribute("entrydate");
         commodity = node.getAttribute("commodity");
-        splits = new SplitGroup(node.getChildNode(SplitGroup.tag));
+        splits = new SplitList(node.getChildNode(SplitList.tag));
     }
 
     public Date getPostDate() throws DataNodeException {
@@ -43,7 +43,7 @@ public class Transaction extends AbstractItemWithId {
         return commodity.toString();
     }
 
-    public SplitGroup getSplits() {
+    public SplitList getSplits() {
         return splits;
     }
 

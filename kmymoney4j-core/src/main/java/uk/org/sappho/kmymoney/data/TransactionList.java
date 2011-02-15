@@ -8,11 +8,11 @@ import org.apache.commons.lang.math.Fraction;
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 
-public class TransactionGroup extends AbstractGroup<Transaction> {
+public class TransactionList extends AbstractList<Transaction> {
 
     public static final String tag = "TRANSACTIONS";
 
-    public TransactionGroup(DataNode node) throws IllegalArgumentException, SecurityException,
+    public TransactionList(DataNode node) throws IllegalArgumentException, SecurityException,
             DataNodeException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 

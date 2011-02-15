@@ -5,14 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 
-public class PriceGroup extends AbstractGroup<PricePairGroup> {
+public class CurrencyList extends AbstractList<Currency> {
 
-    public static final String tag = "PRICES";
+    public static final String tag = "CURRENCIES";
 
-    public PriceGroup(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
+    public CurrencyList(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
             InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
-        super(node, PricePairGroup.class);
+        super(node, Currency.class);
     }
 
     @Override

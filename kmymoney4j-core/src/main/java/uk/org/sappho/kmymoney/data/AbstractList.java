@@ -10,7 +10,7 @@ import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.Value;
 
-abstract public class AbstractGroup<T extends AbstractItem> extends AbstractItem {
+abstract public class AbstractList<T extends AbstractItem> extends AbstractItem {
 
     private final Value count;
     private final List<T> items = new LinkedList<T>();
@@ -19,7 +19,7 @@ abstract public class AbstractGroup<T extends AbstractItem> extends AbstractItem
 
     private final static Class<?>[] constructorParameterTypes = { DataNode.class };
 
-    protected AbstractGroup(DataNode node, Class<T> itemClass) throws DataNodeException,
+    protected AbstractList(DataNode node, Class<T> itemClass) throws DataNodeException,
             IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchMethodException {
 

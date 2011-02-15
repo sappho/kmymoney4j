@@ -5,11 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 
-public class SplitGroup extends AbstractGroup<Split> {
+public class SplitList extends AbstractList<Split> {
 
     public static final String tag = "SPLITS";
 
-    public SplitGroup(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
+    public SplitList(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
             InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         super(node, Split.class);

@@ -6,14 +6,14 @@ import uk.org.sappho.kmymoney.rawdata.DataNode;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.Value;
 
-public class PricePairGroup extends AbstractGroup<Price> {
+public class PricePairList extends AbstractList<Price> {
 
     public static final String tag = "PRICEPAIR";
 
     private final Value fromCurrencyId;
     private final Value toCurrencyId;
 
-    public PricePairGroup(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
+    public PricePairList(DataNode node) throws IllegalArgumentException, SecurityException, DataNodeException,
             InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         super(node, Price.class);
