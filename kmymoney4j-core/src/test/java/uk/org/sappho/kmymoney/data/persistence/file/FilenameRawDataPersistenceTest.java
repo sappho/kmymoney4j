@@ -2,9 +2,11 @@ package uk.org.sappho.kmymoney.data.persistence.file;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import org.junit.Test;
 
+import uk.org.sappho.kmymoney.data.Account;
 import uk.org.sappho.kmymoney.data.KMyMoneyData;
 import uk.org.sappho.kmymoney.rawdata.DataNodeException;
 import uk.org.sappho.kmymoney.rawdata.RawData;
@@ -21,6 +23,7 @@ public class FilenameRawDataPersistenceTest {
                 "../../money-data/Andrew-Money.xml");
         RawData rawdata = persistence.load();
         KMyMoneyData data = new KMyMoneyData(rawdata.getRootNode());
+        Map<String, Account> accounts = data.getAccounts().getIdMap();
         //data.getPayees().add("Colourfull Character");
         //data.setLastUpdated(new Date());
         persistence.save(rawdata);

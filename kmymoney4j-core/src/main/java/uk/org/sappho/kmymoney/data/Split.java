@@ -15,6 +15,7 @@ public class Split extends AbstractItemWithId {
     private final Value memo;
     private final Value shares;
     private final Value value;
+    private final Value reconcileFlag;
 
     private final static DecimalFormat idNumberFormat = new DecimalFormat("0000");
 
@@ -26,6 +27,7 @@ public class Split extends AbstractItemWithId {
         memo = node.getAttribute("memo");
         shares = node.getAttribute("shares");
         value = node.getAttribute("value");
+        reconcileFlag = node.getAttribute("reconcileflag");
     }
 
     public String getPayeeId() {
@@ -51,6 +53,11 @@ public class Split extends AbstractItemWithId {
     public Fraction getValue() throws DataNodeException {
 
         return value.getFraction();
+    }
+
+    public long getReconcileFlag() throws DataNodeException {
+
+        return reconcileFlag.getLong();
     }
 
     @Override
